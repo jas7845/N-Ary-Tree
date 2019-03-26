@@ -5,11 +5,11 @@
 /// date: March 20, 2019
 /////////////////////////////////////////////////////////////////////
 
+#include "N-Ary.h"
+#include "trimit.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "N-Ary.h"
-#include "trimit.h"
 
 char CNValues[9][7] = {
                          "add",
@@ -105,25 +105,11 @@ void find(NTree tree, char input[]){
 	trim(name);
         printf("n: ...%s...\n", name);
 
-	NTree temp= create_node(name);
-	temp = find_node(tree, name);
+	//NTree temp= create_node(name);
+	NTree temp = find_node(tree, name);
         if(temp == NULL)
 		fprintf(stderr, "error: '%s' not found", name); 
-	/*print_node(temp);
-	printf(" had ");
-	for( int i = 0; i< getChildCount(temp); i++){       
-  		if(getChild(temp, i) != NULL){
-                        if( (i == 0) || (i == getChildCount(temp) -1) ){
-				print_node(getChild(temp, i));
-			}
-			else{
-				print_node(getChild(temp, i));
-				printf(" and ");
-			}
-		}
-        }
-	*/
-	print_tree(temp);
+	print_node(temp);
 }
 
 void print(NTree tree, char input[]){
@@ -139,14 +125,24 @@ void print(NTree tree, char input[]){
                 s++;
         }
         name[s] = '\0';
-        printf("n: ...%s...\n", name);
+        //printf("n: ...%s...\n", name);
+	trim(name);
 	if(strlen(name)>1){
+		printf("name is given");
 		NTree tree2print = find_node(tree, name);
 		if(tree2print!= NULL)
 			print_tree(tree2print);
+		//else printf("name is not in tree");
 	}
 	else print_tree(tree);
 }
+
+
+NTree init(NTree tree){
+	destroy(tree);
+	tree = NULL;
+}
+
 
 void help(){
 
@@ -162,7 +158,13 @@ void help(){
 }
 
 
-void theMenu(){
+void quit(NTree tree){
+
+	destroy(tree);
+}
+
+
+void theMenu(NTree tree){
 
 	printf("offspring> ");
 	
@@ -180,7 +182,7 @@ void theMenu(){
 
         char commandName[10];
 	int i= 0;
-        while( imp[i] != ' '){
+        while( imp[i] != ' ' && i < strlen(imp)){
 		commandName[i] = imp[i];
                 i++;
         }
@@ -191,7 +193,7 @@ void theMenu(){
 		cmp =1;
 	}
 
-	NTree tree = create_node("julie");
+	//NTree tree = create_node("julie");
 	while(cmp != 1 ){		//while the command is not quit
 
 		if( strcmp(commandName, CNValues[0]) == 0){		// if add
@@ -235,11 +237,9 @@ void theMenu(){
 			}
 		}
                 if( strcmp(commandName, CNValues[1]) == 0){		// if find
-                        printf("found\n");
 			find(tree, imp);
                 }
                 if( strcmp(commandName, CNValues[2]) == 0){		// if print
-                        printf("printed\n");
 			print(tree, imp);
                 }
                 if( strcmp(commandName, CNValues[3]) == 0){		// if size
@@ -249,11 +249,11 @@ void theMenu(){
                         printf("high\n");
                 }
                 if( strcmp(commandName, CNValues[5]) == 0){		// if help
-                        printf("helped\n");
 			help();
                 }
                 if( strcmp(commandName, CNValues[6]) == 0){		// if init
                         printf("inited\n");
+			tree = init(tree);
                 }
 		
 		printf("offspring> ");
@@ -280,27 +280,55 @@ void theMenu(){
 
 	}
 	printf("quitted");
+	quit(tree);
 }
 
 
 int main(int argc, char * argv[]){
 	
-	if(argc == 2){
+	NTree tree = NULL;
+	if(argc == 2){				//if there is a file
 		//make the tree then continue to while loop
 		FILE *fp;
     		int MAXCHAR = 1024;
 		char str[MAXCHAR];
     		char* filename = argv[1];
-
+		printf("file: %s\n", filename);
     		fp = fopen(filename, "r");
     		if (fp == NULL){
         		fprintf(stderr, "error: could not open file %s", filename);
-    			theMenu();
+    			theMenu(tree);
 		}
-    		while (fgets(str, MAXCHAR, fp) != NULL)
-        		printf("%s", str);
-    		fclose(fp);
+		char *pch[10];
+    		for(int j = 0; j < 10; j++){
+			pch[j] = NULL;
+		}
+		char child[30];
+		char parent[30];
+		fgets(str, MAXCHAR, fp);
+		trim(str);
+		tree = create_node(str, 10);
+		while ((fgets(str, MAXCHAR, fp) != NULL) || !(feof(fp))){
+			pch[0] = strtok( str, ",\n" );
+			int i =0;
+			strcpy(parent, pch[0]);
+			trim(parent);
+			while ( pch[i] != NULL ) {
+                		i++;
+                		pch[i] = strtok( NULL,",\n" );
+				trim(pch[i]);
+				if(pch[i] != NULL){
+					strcpy(child, pch[i]);
+					printf("p: .%s. c: .%s.\n", parent, child); //debug
+					trim(child);
+					tree = add_child(tree, parent, child);
+					print_tree(tree); //debug
+				}
+			}
+		}
+    		fflush(fp);
+		fclose(fp);
 	}
-	theMenu();		
+	theMenu(tree);		
 	return 0;
 }

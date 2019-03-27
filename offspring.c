@@ -26,7 +26,7 @@ char CNValues[9][7] = {
 void height(NTree tree, char input[]){
 
 	int i = 0;
-        while( input[i] != ' '){
+        while( input[i] != ' ' && i < strlen(input)){
                 i++;
         }
         char name[60];
@@ -53,7 +53,7 @@ void height(NTree tree, char input[]){
 void find(NTree tree, char input[]){
 	
 	int i = 0;
-        while( input[i] != ' '){
+        while( input[i] != ' ' && i < strlen(input)){
                 i++;
         }
         char name[60];
@@ -68,7 +68,7 @@ void find(NTree tree, char input[]){
 
 	NTree temp = find_node(tree, name);
         if(temp == NULL)
-		fprintf(stderr, "error: '%s' not found", name); 
+		fprintf(stderr, "error: '%s' not found\n", name); 
 	else print_node(temp);
 }
 
@@ -76,7 +76,7 @@ void find(NTree tree, char input[]){
 void print(NTree tree, char input[]){
 	
 	int i = 0;
-        while( input[i] != ' '){
+        while( input[i] != ' '&& i < strlen(input)){
                 i++;
         }
         char name[60];
@@ -92,7 +92,7 @@ void print(NTree tree, char input[]){
 		if(tree2print!= NULL){
 			print_tree(tree2print);
 		}
-		else fprintf(stderr, "error: '%s' not found", name);
+		else fprintf(stderr, "error: '%s' not found\n", name);
 	}
 	else print_tree(tree);
 }
@@ -101,6 +101,7 @@ void print(NTree tree, char input[]){
 NTree init(NTree tree){
 	destroy(tree);
 	tree = NULL;
+	return tree;
 }
 
 
@@ -126,7 +127,7 @@ void quitit(NTree tree){
 
 void size(NTree tree, char input[]){
 	int i = 0;
-        while( input[i] != ' '){
+        while( input[i] != ' ' && i < strlen(input)){
                 i++;
         }
         char name[60];
@@ -183,7 +184,7 @@ void theMenu(NTree tree){
 
 		if( strcmp(commandName, CNValues[0]) == 0){		// if add
 			int i = 0;
-       			while( imp[i] != ' '){
+       			while( imp[i] != ' ' && i < strlen(imp)){
                 		i++;
         		}
         		char names[60];
@@ -206,16 +207,13 @@ void theMenu(NTree tree){
                 		h++;
                 		while(names[h] !='\0'){
                         		child[p] = names[h];
-                        		//printf("%c", child[p]);
                         		h++;
                        			p++;
                 		}
                 		child[p] = '\0';
                 		trim(parent);
                 		trim(child);
-				//printf("p:%s  c:%s", parent, child);
                 		tree = add_child(tree, parent, child);
-				//print_tree(tree);
 			}
 			else{
                 		printf("Usage: 'add parent name , child name'\n'");
@@ -265,7 +263,7 @@ void theMenu(NTree tree){
 
 	}
 	printf("quitted");
-//	quitit(tree);
+	quitit(tree);
 }
 
 
@@ -311,10 +309,8 @@ int main(int argc, char * argv[]){
                                 trim(pch[i]);
                                 if(pch[i] != NULL){
                                         strcpy(child, pch[i]);
-                                        //printf("p: .%s. c: .%s.\n", parent, child); //debug
                                         trim(child);
                                         tree = add_child(tree, parent, child);
-                                        //print_tree(tree); //debug
 				}
 			}
 		}
@@ -334,7 +330,6 @@ int main(int argc, char * argv[]){
 					printf("p: .%s. c: .%s.\n", parent, child); //debug
 					trim(child);
 					tree = add_child(tree, parent, child);
-					//print_tree(tree); //debug
 				}
 			}
 		

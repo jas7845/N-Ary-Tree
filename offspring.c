@@ -22,69 +22,31 @@ char CNValues[9][7] = {
 			 "quit"
                      };
 
-NTree add(NTree tree, char input[]){	
+
+void height(NTree tree, char input[]){
 
 	int i = 0;
-	while( input[i] != ' '){
-        	i++;
+        while( input[i] != ' '){
+                i++;
         }
-	char names[60];
-	int s = 0;
-	for(unsigned int j = i; j<strlen(input); j++){
-		names[s] = input[j];
-		s++;	
-	}
-	names[s] = '\0';
-	printf("n: ...%s...\n", names);
-	if(strlen(names)>2){
-		char parent[30];
-        	char child[30];
-		int h = 0;
-		while(names[h] != ','){
-			parent[h] = names[h];
-			h++;
-		}
-		parent[h] = '\0';
-		int p = 0;
-		h++;
-		while(names[h] !='\0'){
-			child[p] = names[h];
-			printf("%c", child[p]);
-			h++;
-			p++;
-		}
-		child[p] = '\0';
-		trim(parent);
-		trim(child);
-	/*
-	char *pch[10];
-	pch[0] = strtok( names, ",\n" );
-	int l= 1;
-	while ( pch[l] != NULL ) {
-		pch[l] = strtok( NULL, ",\n" );
-		l++;
+        char name[60];
+        int s = 0;
+        for(unsigned int j = i; j<strlen(input); j++){
+                name[s] = input[j];
+                s++;
         }
-	char parent[30];
-	char child[30];
-	strcpy( parent, pch[0]);
-	strcpy(child, pch[1]);
-	*/
-		printf("parent: %s child: %s\n", parent, child);
-	
-		//NTree new = create_node("jas");
-		//NTree new = find_node(tree, parent);		//how to add when it is the first node
-		//if (new != NULL)
-		tree = add_child(tree, parent, child);
-		//else
-		//	tree = add_child(tree, parent, child);
-		print_tree(tree);		//debugging
-		return tree;
-	}
-	else{
-		printf("Usage: add 'parent name' , 'child name'\n'");
-		return NULL;
+        name[s] = '\0';
+        int height = -1;
+        if(strlen(name)>1){
+                trim(name);
+                NTree tree2print = find_node(tree, name);
+                if(tree2print!= NULL){
+                        height = height_node(tree2print);
+                }
+        }
+        else height = height_node(tree);
 
-	}
+        printf("height: %i\n", height);
 }
 
 
@@ -269,7 +231,7 @@ void theMenu(NTree tree){
                 	size(tree, imp);
 		}
                 if( strcmp(commandName, CNValues[4]) == 0){		// if height
-                        printf("high\n");
+			height(tree, imp);
                 }
                 if( strcmp(commandName, CNValues[5]) == 0){		// if help
 			help();

@@ -51,8 +51,6 @@ void height(NTree tree, char input[]){
                 if(tree2print!= NULL){
                         height = height_node(tree2print);
                 }
-		else
-                	fprintf(stderr, "error: '%s' not found\n", name);
         }
         else height = height_node(tree);
 
@@ -143,8 +141,9 @@ void help(){
 // Funciton to free the tree
 // @param tree: the tree to tree
 void quitit(NTree tree){
-
-	destroy(tree);
+	if(tree != NULL){
+		destroy(tree);
+	}
 }
 
 
@@ -172,8 +171,11 @@ void size(NTree tree, char input[]){
                         size = size_node(tree2print);
                 }
         }
-        else size = size_node(tree);
-
+        else {
+		size = size_node(tree);
+		//int size_2 = DFS_size(tree);
+		//printf("DFS size: %i", size_2);
+	}
 	printf("size: %i\n", size);
 
 }
@@ -297,7 +299,7 @@ int main(int argc, char * argv[]){
     		char* filename = argv[1];
     		fp = fopen(filename, "r");
     		if (fp == NULL){
-        		fprintf(stderr, "error: could not open file %s", filename);
+        		fprintf(stderr, "error: could not open file %s\n", filename);
     			theMenu(tree);
 		}
 		char *pch[10];
@@ -313,7 +315,7 @@ int main(int argc, char * argv[]){
 		}
 		if(j >= (strlen(str) - 1)){		//  if there is not a comma, create new tree ith name
 			trim(str);
-			tree = create_node(str, 10);
+			tree = create_node(str);
 		}
 		else{
 

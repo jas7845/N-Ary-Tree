@@ -16,15 +16,15 @@
 
 // List of the input options 
 char CNValues[9][7] = {
-                         "add",
-                         "find",
-                         "print",
-			 "size",
-			 "height",
-			 "help",
-			 "init",
-			 "quit"
-                     };
+	"add",
+        "find",
+        "print",
+	"size",
+	"height",
+	"help",
+	"init",
+	"quit"
+};
 
 
 // Function to compute the height of the tree at 
@@ -48,13 +48,15 @@ void height(NTree tree, char input[]){
         if(strlen(name)>1){
                 trim(name);
                 NTree tree2print = find_node(tree, name);
-                if(tree2print!= NULL){
+                if(tree2print != NULL){
                         height = height_node(tree2print);
                 }
+		printf("height: %i\n", height);
         }
-        else height = height_node(tree);
-
-        printf("height: %i\n", height);
+        else {
+		height = height_node(tree);
+        	printf("height: %i\n", height);
+	}
 }
 
 
@@ -117,6 +119,7 @@ void print(NTree tree, char input[]){
 // @param tree: the tree to free
 // @return: the null tree
 NTree init(NTree tree){
+	
 	destroy(tree);
 	tree = NULL;
 	return tree;
@@ -141,6 +144,7 @@ void help(){
 // Funciton to free the tree
 // @param tree: the tree to tree
 void quitit(NTree tree){
+	
 	if(tree != NULL){
 		destroy(tree);
 	}
@@ -152,6 +156,7 @@ void quitit(NTree tree){
 // @param input: input that contains the name, if given 
 // 	of the starting parent
 void size(NTree tree, char input[]){
+	
 	int i = 0;
         while( input[i] != ' ' && i < strlen(input)){
                 i++;
@@ -173,11 +178,8 @@ void size(NTree tree, char input[]){
         }
         else {
 		size = size_node(tree);
-		//int size_2 = DFS_size(tree);
-		//printf("DFS size: %i", size_2);
 	}
 	printf("size: %i\n", size);
-
 }
 
 
@@ -244,7 +246,7 @@ void theMenu(NTree tree){
                 		tree = add_child(tree, parent, child);
 			}
 			else{
-                		printf("Usage: 'add parent name , child name'\n'");
+                		printf("Usage: 'add parent name', child name'\n");
 			}
 		}
                 if( strcmp(commandName, CNValues[1]) == 0){		// if find

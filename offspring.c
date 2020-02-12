@@ -33,29 +33,32 @@ char CNValues[9][7] = {
 // @param input: the name of the parent to start from
 void height(NTree tree, char input[]){
 
-	int i = 0;
-        while( input[i] != ' ' && i < strlen(input)){
-                i++;
-        }
-        char name[60];
-        int s = 0;
-        for(unsigned int j = i; j<strlen(input); j++){
-                name[s] = input[j];
-                s++;
-        }
-        name[s] = '\0';
-        int height = -1;
-        if(strlen(name)>1){
-                trim(name);
-                NTree tree2print = find_node(tree, name);
-                if(tree2print != NULL){
-                        height = height_node(tree2print);
-                }
-		printf("height: %i\n", height);
-        }
-        else {
-		height = height_node(tree);
-        	printf("height: %i\n", height);
+	if(tree != NULL){	
+		unsigned int i = 0;
+        	while( input[i] != ' ' && i < strlen(input)){
+        	        i++;
+        	}
+        	char name[60];
+        	int s = 0;
+        	for(unsigned int j = i; j<strlen(input); j++){
+        	        name[s] = input[j];
+        	        s++;
+        	}
+        	name[s] = '\0';
+        	int height = -1;
+        	if(strlen(name)>1){
+        	        trim(name);
+        	        NTree tree2print = find_node(tree, name);
+                	if(tree2print != NULL){
+                	        height = height_node(tree2print);
+                	}
+			printf("height: %i\n", height);
+	        }
+	        else {
+			height = height_node(tree);
+        		printf("height: %i\n", height);
+		}
+
 	}
 }
 
@@ -65,23 +68,26 @@ void height(NTree tree, char input[]){
 // @param tree: the tree to search thorugh
 // @param input: contains the name of the person to search for
 void find(NTree tree, char input[]){
-	
-	int i = 0;
-        while( input[i] != ' ' && i < strlen(input)){
-                i++;
-        }
-        char name[60];
-        int s = 0;
-        for(unsigned int j = i; j<strlen(input); j++){
-                name[s] = input[j];
-                s++;
-        }
-        name[s] = '\0';
-	trim(name);
-	NTree temp = find_node(tree, name);
-        if(temp == NULL)
-		fprintf(stderr, "error: '%s' not found\n", name); 
-	else print_node(temp);
+	if(tree != NULL){
+        
+		unsigned int i = 0;
+        	while( input[i] != ' ' && i < strlen(input)){
+        	        i++;
+        	}
+        	char name[60];
+        	int s = 0;
+        	for(unsigned int j = i; j<strlen(input); j++){
+        	        name[s] = input[j];
+        	        s++;
+        	}
+        	name[s] = '\0';
+		trim(name);
+		NTree temp = find_node(tree, name);
+        	if(temp == NULL)
+			fprintf(stderr, "error: '%s' not found\n", name); 
+		else print_node(temp);
+
+	}
 }
 
 
@@ -92,26 +98,28 @@ void find(NTree tree, char input[]){
 // 	printing at
 void print(NTree tree, char input[]){
 	
-	int i = 0;
-        while( input[i] != ' '&& i < strlen(input)){
-                i++;
-        }
-        char name[60];
-        int s = 0;
-        for(unsigned int j = i; j<strlen(input); j++){
-                name[s] = input[j];
-                s++;
-        }
-        name[s] = '\0';
-	if(strlen(name)>1){
-		trim(name);
-		NTree tree2print = find_node(tree, name);
-		if(tree2print!= NULL){
-			print_tree(tree2print);
+	if(tree != NULL){
+
+		unsigned int i = 0;
+        	while( input[i] != ' '&& i < strlen(input)){
+        	        i++;
+        	}
+        	char name[60];
+        	int s = 0;
+        	for(unsigned int j = i; j<strlen(input); j++){
+        	        name[s] = input[j];
+        	        s++;
+        	}
+        	name[s] = '\0';
+		if(strlen(name)>1){
+			trim(name);
+			NTree tree2print = find_node(tree, name);
+			if(tree2print!= NULL){
+				print_tree(tree2print);
+			}
 		}
-		else fprintf(stderr, "error: '%s' not found\n", name);
+		else print_tree(tree);
 	}
-	else print_tree(tree);
 }
 
 
@@ -119,7 +127,9 @@ void print(NTree tree, char input[]){
 // @param tree: the tree to free
 // @return: the null tree
 NTree init(NTree tree){
-	
+	if(tree ==NULL){
+                return tree;
+        }
 	destroy(tree);
 	tree = NULL;
 	return tree;
@@ -156,30 +166,31 @@ void quitit(NTree tree){
 // @param input: input that contains the name, if given 
 // 	of the starting parent
 void size(NTree tree, char input[]){
-	
-	int i = 0;
-        while( input[i] != ' ' && i < strlen(input)){
-                i++;
-        }
-        char name[60];
-        int s = 0;
-        for(unsigned int j = i; j<strlen(input); j++){
-                name[s] = input[j];
-                s++;
-        }
-        name[s] = '\0';
-	int size = 0;
-        if(strlen(name)>1){
-                trim(name);
-                NTree tree2print = find_node(tree, name);
-                if(tree2print!= NULL){
-                        size = size_node(tree2print);
-                }
-        }
-        else {
-		size = size_node(tree);
+	if(tree !=NULL){
+		unsigned int i = 0;
+        	while( input[i] != ' ' && i < strlen(input)){
+        	        i++;
+        	}
+        	char name[60];
+        	int s = 0;
+        	for(unsigned int j = i; j<strlen(input); j++){
+        	        name[s] = input[j];
+        	        s++;
+        	}
+        	name[s] = '\0';
+		int size = 0;
+        	if(strlen(name)>1){
+        	        trim(name);
+        	        NTree tree2print = find_node(tree, name);
+        	        if(tree2print!= NULL){
+        	                size = size_node(tree2print);
+        	        }
+        	}
+        	else {
+			size = size_node(tree);
+		}
+		printf("size: %i\n", size);
 	}
-	printf("size: %i\n", size);
 }
 
 
@@ -202,7 +213,7 @@ void theMenu(NTree tree){
         }
 
         char commandName[10];
-	int i= 0;
+	unsigned int i= 0;
         while( imp[i] != ' ' && i < strlen(imp)){
 		commandName[i] = imp[i];
                 i++;
@@ -210,10 +221,10 @@ void theMenu(NTree tree){
         commandName[i]= '\0';
         char quit[] = "quit";
 	
-	while(strcmp(commandName, quit) != 0 ){		//while the command is not quit
+	while(strcmp(commandName, quit) != 0 ){		//while the command is not quit or something else
 
 		if(strcmp(commandName, CNValues[0]) == 0){		// if add
-			int i = 0;
+			unsigned int i = 0;
        			while( imp[i] != ' ' && i < strlen(imp)){
                 		i++;
         		}
@@ -249,25 +260,26 @@ void theMenu(NTree tree){
                 		printf("Usage: 'add parent name', child name'\n");
 			}
 		}
-                if( strcmp(commandName, CNValues[1]) == 0){		// if find
+		else if( strcmp(commandName, CNValues[1]) == 0){		// if find
 			find(tree, imp);
                 }
-                if( strcmp(commandName, CNValues[2]) == 0){		// if print
+		else if( strcmp(commandName, CNValues[2]) == 0){		// if print
 			print(tree, imp);
                 }
-                if( strcmp(commandName, CNValues[3]) == 0){		// if size
+		else if( strcmp(commandName, CNValues[3]) == 0){		// if size
                 	size(tree, imp);
 		}
-                if( strcmp(commandName, CNValues[4]) == 0){		// if height
+		else if( strcmp(commandName, CNValues[4]) == 0){		// if height
 			height(tree, imp);
                 }
-                if( strcmp(commandName, CNValues[5]) == 0){		// if help
+		else if( strcmp(commandName, CNValues[5]) == 0){		// if help
 			help();
                 }
-                if( strcmp(commandName, CNValues[6]) == 0){		// if init
+		else if( strcmp(commandName, CNValues[6]) == 0){		// if init
 			tree = init(tree);
                 }
-		
+		else { break; 
+		}
 		printf("offspring> ");
 		if(fgets(imp, implen, stdin)){
                 	char *c;
@@ -285,7 +297,9 @@ void theMenu(NTree tree){
         	        i++;
         	}
         	commandName[i]= '\0';
+		
 	}
+	printf("\n");
 	quitit(tree);
 }
 
@@ -311,7 +325,7 @@ int main(int argc, char * argv[]){
 		char child[30];
 		char parent[30];
 		fgets(str, MAXCHAR, fp);
-		int j = 0;
+		unsigned int j = 0;
 	        while(j< strlen(str) && str[j] != ','){	//  check if the first line has a comma (multiple names)
 			j++;		
 		}

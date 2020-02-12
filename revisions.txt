@@ -1,0 +1,59 @@
+commit c49224c66e0e4cfa38e953b17d1f24e5c8b1fe65
+Author: Julie Ann Sojkowski <jas7845@cs.rit.edu>
+Date:   Thu Mar 28 21:20:59 2019 -0400
+
+    Done
+
+commit 8f570a2b8e6a5598a408722d1f418686f2aeaeb2
+Author: Julie Ann Sojkowski <jas7845@cs.rit.edu>
+Date:   Thu Mar 28 21:07:25 2019 -0400
+
+    Possibly done
+
+commit 4c0ee4795788fda328ee019254cf91eb76e1023e
+Author: Julie Ann Sojkowski <jas7845@cs.rit.edu>
+Date:   Wed Mar 27 18:15:20 2019 -0400
+
+    Commented
+
+commit 0a50dabf47eca50f1a52982c9818e506be3d9d7e
+Author: Julie Ann Sojkowski <jas7845@cs.rit.edu>
+Date:   Wed Mar 27 17:08:04 2019 -0400
+
+    Need to comment
+
+commit fc43d3076d090d20694b8a83262ef9a21a12de2f
+Author: Julie Ann Sojkowski <jas7845@cs.rit.edu>
+Date:   Wed Mar 27 00:13:16 2019 -0400
+
+    Need to do init/quit aka deal with memory leaks
+
+commit a47e86d42e9d50067dddc58c34ee084d6e93368c
+Author: Julie Ann Sojkowski <jas7845@cs.rit.edu>
+Date:   Tue Mar 26 21:58:29 2019 -0400
+
+    still need to do height
+
+commit 025671dceb8dec8b0c6f8f4f5f8a9eea873deec2
+Author: Julie Ann Sojkowski <jas7845@cs.rit.edu>
+Date:   Tue Mar 26 16:01:38 2019 -0400
+
+    Everything but size and height working
+
+commit 2dbe875c83aa58ab78db82e72964fbfc697cc123
+Author: Julie Ann Sojkowski <jas7845@cs.rit.edu>
+Date:   Mon Mar 25 19:36:20 2019 -0400
+
+    working on file imput
+
+commit 5fb31a5692c81b7bc848a9d184ad8dc9b5b40450
+Author: Julie Ann Sojkowski <jas7845@cs.rit.edu>
+Date:   Sun Mar 24 20:30:39 2019 -0400
+
+    Integrating header
+
+commit 5755cc4112038e514a04430ef44c2bb7abd06701
+Author: Julie Ann Sojkowski <jas7845@cs.rit.edu>
+Date:   Sun Mar 24 14:40:26 2019 -0400
+
+    Tree almost working
